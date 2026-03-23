@@ -1,19 +1,22 @@
 const form = document.querySelector('.login-form');
-const inputField = document.querySelectorAll('input');
+const inputField = document.querySelectorAll('.login-form-input');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const formData = [];
+  const formData = {
+    email: '',
+    password: '',
+  };
 
   for (const inputs of inputField) {
-    if (inputs.value === '') {
-      inputs.setCustomValidity('All form fields must be filled in');
-      inputs.reportValidity();
+    const trimmedValues = inputs.value.trim();
+
+    if (trimmedValues === '') {
+      alert('All form fields must be filled in');
       return false;
     } else {
-      inputs.setCustomValidity('');
-      formData.push(inputs.value);
+      formData[inputs.name] = trimmedValues;
     }
   }
 
